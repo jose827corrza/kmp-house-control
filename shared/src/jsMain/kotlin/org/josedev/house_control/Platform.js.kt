@@ -1,0 +1,16 @@
+package org.josedev.house_control
+
+import web.navigator.navigator
+
+class JsPlatform : Platform {
+    private val userAgent = navigator.userAgent
+    private val browserList = listOf("Chrome", "Firefox", "Safari", "Edge")
+
+    override val name: String = userAgent.findAnyOf(browserList, ignoreCase = true)
+        ?.let { (startIndex) -> userAgent.substring(startIndex).substringBefore(" ") }
+        ?: "Unknown"
+
+    override val test: Boolean = false
+}
+
+actual fun getPlatform(): Platform = JsPlatform()
