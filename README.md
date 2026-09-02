@@ -46,3 +46,13 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack
 channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web). If you face any issues, please report them
 on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+
+# CONSIDERATIONS
+
+IF libs that affect web are applied, is required to run:
+
+> ./gradlew kotlinUpgradeYarnLock
+
+But if in grade.properties there is configured the line below, nothing is required because NPM will do the work.
+
+> kotlin.js.yarn=false
