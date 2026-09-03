@@ -1,34 +1,31 @@
 package org.josedev.house_control
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.painterResource
-
-import house_control.shared.generated.resources.Res
-import house_control.shared.generated.resources.compose_multiplatform
 import org.josedev.house_control.di.appModule
+import org.josedev.house_control.utils.AppLogger
 import org.koin.compose.KoinApplication
+import org.koin.compose.koinInject
 
 @Composable
 @Preview
 fun App() {
+    var status by remember { mutableStateOf(false) }
+
     KoinApplication(application = {
         modules(appModule)
     }) {
         MaterialTheme {
+            val appLogger: AppLogger = koinInject()
             var showContent by remember { mutableStateOf(false) }
             Column(
                 modifier = Modifier
@@ -52,8 +49,19 @@ fun App() {
                         }
                     }
                 }
+
+                Switch(
+                    checked = status,
+                    onCheckedChange = { newValue ->
+                        status = newValue
+                        changed(newValue, appLogger)
+                    },
+                )
             }
         }
     }
+}
 
+fun changed(state: Boolean, appLogger: AppLogger) {
+    appLogger.d("APP", "changed $state")
 }
