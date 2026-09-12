@@ -56,3 +56,30 @@ IF libs that affect web are applied, is required to run:
 But if in grade.properties there is configured the line below, nothing is required because NPM will do the work.
 
 > kotlin.js.yarn=false
+
+## Data Structure from Backend
+
+## Fetch Houses
+
+This will bring the complete list of houses and its actuators, following the structure. 
+This is the response expected with fetchHouses().
+
+```json
+[
+    {
+      "house_name": "Soacha",
+      "house_id": "aaa-bbb-ccc",
+      "actuator_id": "abc-abc-abc",
+      "actuator_name": "kitchen",
+      "actuator_state": false
+    },
+    {
+      "house_name": "Bogota",
+      "house_id": "xxx-yyy-zzz",
+      "actuator_id": "xyz-xyz-xyz",
+      "actuator_name": "living room",
+      "actuator_state": false
+    }
+]
+
+```
