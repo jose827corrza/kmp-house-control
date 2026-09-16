@@ -2,28 +2,21 @@ package org.josedev.house_control.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.josedev.house_control.domain.HouseUiState
 import org.josedev.house_control.domain.models.Actuator
+import org.josedev.house_control.domain.models.House
 import org.josedev.house_control.domain.repository.HouseRepository
-import org.josedev.house_control.utils.AppLogger
 
 class HouseViewModel(
     private val houseRepository: HouseRepository,
-    private val logger: AppLogger
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<HouseUiState>(HouseUiState.Loading)
     val uiState: StateFlow<HouseUiState> = _uiState.asStateFlow()
 
-    private val _rawActuators = MutableStateFlow<Map<String, List<Actuator>>>(emptyMap())
+    private val _rawActuators = MutableStateFlow<Map<House, List<Actuator>>>(emptyMap())
     private val _updatingIds = MutableStateFlow<Set<String>>(emptySet())
     private val _isLoading = MutableStateFlow(false)
     private val _isError = MutableStateFlow<String?>(null)
@@ -40,7 +33,7 @@ class HouseViewModel(
             else -> {
                 val decoratedMap = actuators.mapValues { (_, list) ->
                     list.map { actuator ->
-                        actuator.copy(isUpdating = updatingIds.contains(actuator.actuatorId))
+                        actuator.copy(isUpdating = updatingIds.contains(actuator.id))
                     }
                 }
                 HouseUiState.Success(actuators = decoratedMap)
@@ -93,7 +86,7 @@ class HouseViewModel(
         _rawActuators.update { currentMap ->
             currentMap.mapValues { (_, list) ->
                 list.map { act ->
-                    if(act.actuatorId == actuatorId) act.copy(isUpdating = newValue) else act
+                    if(act.id == actuatorId) act.copy(isUpdating = newValue) else act
                 }
             }
         }

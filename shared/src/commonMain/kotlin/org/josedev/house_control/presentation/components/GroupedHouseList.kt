@@ -4,21 +4,22 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import org.josedev.house_control.domain.models.Actuator
+import org.josedev.house_control.domain.models.House
 
 @Composable
 fun GroupedHouseList(
-    groupedData: Map<String, List<Actuator>>,
+    groupedData: Map<House, List<Actuator>>,
     onToggleActuator: (id: String, toggle: Boolean) -> Unit,
 ) {
     LazyColumn {
         groupedData.forEach { (groupHeader, actuatorList) ->
             stickyHeader {
-                HeaderItem(groupHeader)
+                HeaderItem(groupHeader.houseName)
             }
 
             items(
                 items = actuatorList,
-                key = { key -> key.actuatorId },
+                key = { key -> key.id },
             ) { actuator ->
                 DeviceRowItem(actuator, toggle = { id, state ->
                     onToggleActuator(id, state)

@@ -1,12 +1,6 @@
 package org.josedev.house_control.presentation.components
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -33,13 +27,13 @@ fun DeviceRowItem(
             Spacer(Modifier.width(20.dp))
         } else {
             Text(
-                text = actuator.actuatorName,
+                text = actuator.name,
             )
 
             Switch(
                 checked = switchStatus, onCheckedChange = {
                     switchStatus = it
-                    toggle(actuator.actuatorId, switchStatus)
+                    toggle(actuator.id, switchStatus)
                 })
 
         }

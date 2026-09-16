@@ -5,6 +5,9 @@ import io.ktor.client.plugins.*
 import io.ktor.client.plugins.auth.*
 import io.ktor.client.plugins.auth.providers.*
 import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 import org.josedev.house_control.data.client.ClientApi
@@ -12,6 +15,7 @@ import org.josedev.house_control.data.client.ClientApiImpl
 import org.josedev.house_control.data.repository.HouseRepositoryImpl
 import org.josedev.house_control.domain.repository.HouseRepository
 import org.josedev.house_control.presentation.viewmodels.HouseViewModel
+import org.josedev.house_control.utils.AppLogger
 import org.josedev.house_control.utils.Constants.BASE_URL
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
@@ -29,12 +33,13 @@ fun createHttpClient() = HttpClient {
             ignoreUnknownKeys = true
         })
     }
-    install(Auth) {
-        bearer {
-            loadTokens {
-                BearerTokens("e", "w")
+    install(Logging) {
+        logger = object: Logger {
+            override fun log(message: String) {
+                println(message)
             }
         }
+        level = LogLevel.ALL
     }
     defaultRequest {
         url(BASE_URL)
