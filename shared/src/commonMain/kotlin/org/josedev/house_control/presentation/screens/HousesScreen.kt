@@ -16,11 +16,11 @@ import androidx.compose.ui.Modifier
 import org.josedev.house_control.domain.HouseUiState
 import org.josedev.house_control.presentation.components.GroupedHouseList
 import org.josedev.house_control.presentation.viewmodels.HouseViewModel
-import org.koin.compose.viewmodel.koinViewModel
+import org.koin.compose.koinInject
 
 @Composable
 fun HousesScreen(
-    viewModel: HouseViewModel = koinViewModel(),
+    viewModel: HouseViewModel = koinInject(),
 ) {
     val uiState by viewModel.newUiState.collectAsState()
 

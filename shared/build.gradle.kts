@@ -26,11 +26,6 @@ kotlin {
         browser()
     }
 
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        browser()
-    }
-
     android {
         namespace = "org.josedev.house_control.shared"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -58,6 +53,7 @@ kotlin {
             implementation(libs.compose.uiTooling)
             implementation(libs.ktor.client.android)
             implementation(libs.koin.android)
+            implementation(libs.security.crypto)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)

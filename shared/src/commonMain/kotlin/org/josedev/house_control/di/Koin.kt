@@ -10,6 +10,7 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
+import org.josedev.house_control.auth.TokenStorage
 import org.josedev.house_control.data.client.ClientApi
 import org.josedev.house_control.data.client.ClientApiImpl
 import org.josedev.house_control.data.repository.HouseRepositoryImpl
@@ -25,7 +26,29 @@ import org.koin.dsl.module
 
 expect val loggingModule: Module
 
-fun createHttpClient() = HttpClient {
+fun createHttpClient(tokenStorage: TokenStorage) = HttpClient {
+
+    install(Auth) {
+        bearer {
+            loadTokens {
+                val accessToken = tokenStorage.getAccessToken()
+                val refreshToken = tokenStorage.getRefreshToken()
+
+                if (accessToken != null && refreshToken != null) {
+                    BearerTokens("abc123", "xyz111")
+                } else null
+            }
+
+//            refreshTokens {
+//                val currentRefresh = tokenStorage.getRefreshToken() ?: return@refreshTokens null
+//                val newTokens = "performCognitoRefresh(currentRefresh)"
+//
+//                tokenStorage.saveAccessToken(newTokens)
+//
+//                if (newTokens)
+//            }
+        }
+    }
     install(ContentNegotiation) {
         json(Json {
             prettyPrint = true
@@ -34,7 +57,7 @@ fun createHttpClient() = HttpClient {
         })
     }
     install(Logging) {
-        logger = object: Logger {
+        logger = object : Logger {
             override fun log(message: String) {
                 println(message)
             }
@@ -47,7 +70,7 @@ fun createHttpClient() = HttpClient {
 }
 
 val networkModule = module {
-    single { createHttpClient() }
+    single { createHttpClient(get()) }
     singleOf(::ClientApiImpl) bind ClientApi::class
 }
 
