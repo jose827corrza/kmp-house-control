@@ -59,7 +59,7 @@ But if in grade.properties there is configured the line below, nothing is requir
 
 ## Data Structure from Backend
 
-## Fetch Houses
+### Fetch Houses
 
 This will bring the complete list of houses and its actuators, following the structure. 
 This is the response expected with fetchHouses().
@@ -83,3 +83,10 @@ This is the response expected with fetchHouses().
 ]
 
 ```
+
+## Auth Flow
+
+Since at least in a first approach of application, is desired to keep complete control for auth flow, it will be 
+implemented the Direct Native over OAuth2.0 / OICD.
+
+In this way, the deal of manage with popups will be avoided.

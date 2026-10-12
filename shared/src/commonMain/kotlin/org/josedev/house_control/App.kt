@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.josedev.house_control.di.appModule
+import org.josedev.house_control.navigation.AppNavigation
 import org.josedev.house_control.presentation.screens.HousesScreen
 import org.koin.compose.KoinApplication
 
@@ -29,7 +30,8 @@ fun App() {
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                HousesScreen()
+                AppNavigation()
+//                HousesScreen()
 //                Button(onClick = { showContent = !showContent }) {
 //                    Text("Click me!")
 //                }

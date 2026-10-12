@@ -12,10 +12,6 @@ import org.josedev.house_control.domain.repository.HouseRepository
 class HouseViewModel(
     private val houseRepository: HouseRepository,
 ) : ViewModel() {
-
-    private val _uiState = MutableStateFlow<HouseUiState>(HouseUiState.Loading)
-    val uiState: StateFlow<HouseUiState> = _uiState.asStateFlow()
-
     private val _rawActuators = MutableStateFlow<Map<House, List<Actuator>>>(emptyMap())
     private val _updatingIds = MutableStateFlow<Set<String>>(emptySet())
     private val _isLoading = MutableStateFlow(false)
@@ -86,7 +82,7 @@ class HouseViewModel(
         _rawActuators.update { currentMap ->
             currentMap.mapValues { (_, list) ->
                 list.map { act ->
-                    if(act.id == actuatorId) act.copy(isUpdating = newValue) else act
+                    if (act.id == actuatorId) act.copy(isUpdating = newValue) else act
                 }
             }
         }

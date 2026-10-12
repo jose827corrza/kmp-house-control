@@ -35,7 +35,7 @@ fun createHttpClient(tokenStorage: TokenStorage) = HttpClient {
                 val refreshToken = tokenStorage.getRefreshToken()
 
                 if (accessToken != null && refreshToken != null) {
-                    BearerTokens("abc123", "xyz111")
+                    BearerTokens(accessToken, refreshToken)
                 } else null
             }
 
