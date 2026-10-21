@@ -12,10 +12,12 @@ import org.josedev.house_control.domain.LoginUiState
 import org.josedev.house_control.domain.models.auth.CognitoTokenResponse
 import org.josedev.house_control.domain.repository.AuthRepository
 import org.josedev.house_control.presentation.repository.LoginEvent
+import org.josedev.house_control.utils.AppLogger
 
 class LoginViewModel(
     private val authRepository: AuthRepository,
     private val tokenStorage: TokenStorage,
+    private val logger: AppLogger,
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(LoginUiState())
     val uiState: StateFlow<LoginUiState> = _uiState.asStateFlow()

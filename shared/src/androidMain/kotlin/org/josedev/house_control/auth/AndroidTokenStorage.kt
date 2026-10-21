@@ -1,10 +1,10 @@
 package org.josedev.house_control.auth
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 import org.josedev.house_control.utils.Constants.ACCESS_TOKEN_KEY
-import androidx.core.content.edit
 import org.josedev.house_control.utils.Constants.REFRESH_TOKEN_KEY
 
 class AndroidTokenStorage(context: Context) : TokenStorage {

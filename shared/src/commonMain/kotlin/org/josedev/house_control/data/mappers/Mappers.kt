@@ -3,7 +3,6 @@ package org.josedev.house_control.data.mappers
 import org.josedev.house_control.data.client.models.ActuatorDTO
 import org.josedev.house_control.data.client.models.HouseDTO
 import org.josedev.house_control.data.client.models.auth.AuthenticationResultDTO
-import org.josedev.house_control.data.client.models.auth.CognitoTokenRequestDTO
 import org.josedev.house_control.data.client.models.auth.CognitoTokenResponseDTO
 import org.josedev.house_control.domain.models.Actuator
 import org.josedev.house_control.domain.models.House

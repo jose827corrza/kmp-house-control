@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CognitoTokenRequestDTO(
 
-    @SerialName("AuthFLow")
-    val authFlow: String = "USER_PASSWORD_AUTH",
+    @SerialName("AuthFlow")
+    val authFlow: String,
 
     @SerialName("ClientId")
     val clientId: String,

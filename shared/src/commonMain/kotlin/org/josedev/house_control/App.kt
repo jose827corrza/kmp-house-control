@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import org.josedev.house_control.di.appModule
 import org.josedev.house_control.navigation.AppNavigation
-import org.josedev.house_control.presentation.screens.HousesScreen
 import org.koin.compose.KoinApplication
 
 @Composable
@@ -31,30 +30,6 @@ fun App() {
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 AppNavigation()
-//                HousesScreen()
-//                Button(onClick = { showContent = !showContent }) {
-//                    Text("Click me!")
-//                }
-//                AnimatedVisibility(showContent) {
-//                    val greeting = remember { Greeting().greet() }
-//                    Column(
-//                        modifier = Modifier.fillMaxWidth(),
-//                        horizontalAlignment = Alignment.CenterHorizontally,
-//                    ) {
-//                        greeting.forEach { greeting ->
-//                            Text(greeting)
-//                            HorizontalDivider()
-//                        }
-//                    }
-//                }
-//
-//                Switch(
-//                    checked = status,
-//                    onCheckedChange = { newValue ->
-//                        status = newValue
-//                        changed(newValue, appLogger)
-//                    },
-//                )
             }
         }
     }

@@ -2,7 +2,10 @@ package org.josedev.house_control.presentation.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,7 +21,6 @@ import org.josedev.house_control.presentation.repository.LoginEvent
 import org.josedev.house_control.presentation.viewmodels.LoginViewModel
 import org.koin.compose.koinInject
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     nav: NavController,
@@ -109,7 +111,7 @@ fun LoginScreen(
 //            Text(text = "Sign up")
 //        }
     }
-    if (loginState.errorMessage != null) {
-//        Toast.makeText(context, "Check your credentials.", Toast.LENGTH_LONG).show()
-    }
+//    if (loginState.errorMessage != null) {
+////        Toast.makeText(context, "Check your credentials.", Toast.LENGTH_LONG).show()
+//    }
 }
