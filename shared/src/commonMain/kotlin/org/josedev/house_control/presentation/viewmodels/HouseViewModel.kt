@@ -49,7 +49,7 @@ class HouseViewModel(
         viewModelScope.launch {
             _isLoading.value = true
 
-            houseRepository.fetchHouses("")
+            houseRepository.fetchHouses()
                 .onSuccess { groupedActuators ->
                     _rawActuators.value = groupedActuators
                     _isLoading.value = false

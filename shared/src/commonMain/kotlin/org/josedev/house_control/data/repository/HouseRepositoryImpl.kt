@@ -10,8 +10,8 @@ import org.josedev.house_control.domain.repository.HouseRepository
 class HouseRepositoryImpl(
     private val client: ClientApi
 ) : HouseRepository {
-    override suspend fun fetchHouses(token: String): Result<Map<House, List<Actuator>>> = runCatching {
-        client.fetchHouses("TOKEN")
+    override suspend fun fetchHouses(): Result<Map<House, List<Actuator>>> = runCatching {
+        client.fetchHouses()
             .associate { houseDTO ->
                 val house = houseDTO.toDomain()
                 house to house.actuators.values.toList()

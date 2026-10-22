@@ -20,20 +20,17 @@ class ClientApiImpl(
 ) : ClientApi {
 
 
-    override suspend fun sendActuatorState(token: String, actuatorRequest: ActuatorRequest): Unit {
+    override suspend fun sendActuatorState(token: String, actuatorRequest: ActuatorRequest) {
         return httpClient.post("control") {
             contentType(Json)
             setBody(actuatorRequest)
-            headers {
-                append(Authorization, "Bearer $token")
-            }
+            bearerAuth(token)
         }.body()
     }
 
-    override suspend fun fetchHouses(token: String): List<HouseDTO> {
+    override suspend fun fetchHouses(): List<HouseDTO> {
         return httpClient.get("houses") {
             contentType(Json)
-            bearerAuth(token)
         }.body()
     }
 
