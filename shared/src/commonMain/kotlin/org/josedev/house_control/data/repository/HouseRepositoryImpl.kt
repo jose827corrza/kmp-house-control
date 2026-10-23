@@ -1,7 +1,7 @@
 package org.josedev.house_control.data.repository
 
 import org.josedev.house_control.data.client.ClientApi
-import org.josedev.house_control.data.client.models.ActuatorRequest
+import org.josedev.house_control.data.client.models.ActuatorRequestDTO
 import org.josedev.house_control.data.mappers.toDomain
 import org.josedev.house_control.domain.models.Actuator
 import org.josedev.house_control.domain.models.House
@@ -19,6 +19,6 @@ class HouseRepositoryImpl(
     }
 
     override suspend fun updateActuatorState(id: String, newState: Boolean): Result<Unit> = runCatching {
-        client.sendActuatorState("", ActuatorRequest(id, newState))
+        client.sendActuatorState("", ActuatorRequestDTO(id, newState))
     }
 }

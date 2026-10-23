@@ -1,10 +1,12 @@
 package org.josedev.house_control.data.mappers
 
 import org.josedev.house_control.data.client.models.ActuatorDTO
+import org.josedev.house_control.data.client.models.ActuatorRequestDTO
 import org.josedev.house_control.data.client.models.HouseDTO
 import org.josedev.house_control.data.client.models.auth.AuthenticationResultDTO
 import org.josedev.house_control.data.client.models.auth.CognitoTokenResponseDTO
 import org.josedev.house_control.domain.models.Actuator
+import org.josedev.house_control.domain.models.ActuatorRequest
 import org.josedev.house_control.domain.models.House
 import org.josedev.house_control.domain.models.auth.AuthenticationResult
 import org.josedev.house_control.domain.models.auth.CognitoTokenResponse
@@ -20,9 +22,17 @@ fun HouseDTO.toDomain(): House {
 fun ActuatorDTO.toDomain(key: String): Actuator {
     return Actuator(
         id = key,
-        name = this.name,
+        name = this.name.orEmpty(),
         isActive = this.isActive,
         isUpdating = false
+    )
+}
+
+fun ActuatorRequest.toData(): ActuatorRequestDTO {
+    return ActuatorRequestDTO(
+        houseId = this.houseId,
+        actuatorId = this.actuatorId,
+        actuatorState = this.actuatorState
     )
 }
 

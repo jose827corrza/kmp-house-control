@@ -10,7 +10,7 @@ import io.ktor.http.*
 import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.HttpHeaders.Authorization
 import io.ktor.http.headers
-import org.josedev.house_control.data.client.models.ActuatorRequest
+import org.josedev.house_control.data.client.models.ActuatorRequestDTO
 import org.josedev.house_control.data.client.models.HouseDTO
 import org.josedev.house_control.utils.AppLogger
 
@@ -20,10 +20,10 @@ class ClientApiImpl(
 ) : ClientApi {
 
 
-    override suspend fun sendActuatorState(token: String, actuatorRequest: ActuatorRequest) {
+    override suspend fun sendActuatorState(token: String, actuatorRequestDTO: ActuatorRequestDTO) {
         return httpClient.post("control") {
             contentType(Json)
-            setBody(actuatorRequest)
+            setBody(actuatorRequestDTO)
             bearerAuth(token)
         }.body()
     }

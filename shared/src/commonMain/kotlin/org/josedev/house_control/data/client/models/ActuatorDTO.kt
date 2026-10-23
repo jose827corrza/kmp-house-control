@@ -9,5 +9,5 @@ data class ActuatorDTO(
     val isActive: Boolean,
 
     @SerialName("name")
-    val name: String
+    val name: String?
 )
