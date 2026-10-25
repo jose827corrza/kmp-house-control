@@ -9,7 +9,7 @@ import org.josedev.house_control.domain.models.House
 @Composable
 fun GroupedHouseList(
     groupedData: Map<House, List<Actuator>>,
-    onToggleActuator: (id: String, toggle: Boolean) -> Unit,
+    onToggleActuator: (id: String, houseId: String, toggle: Boolean) -> Unit,
 ) {
     LazyColumn {
         groupedData.forEach { (groupHeader, actuatorList) ->
@@ -22,7 +22,7 @@ fun GroupedHouseList(
                 key = { key -> key.id },
             ) { actuator ->
                 DeviceRowItem(actuator, toggle = { id, state ->
-                    onToggleActuator(id, state)
+                    onToggleActuator(id, groupHeader.houseId,state)
                 })
             }
         }

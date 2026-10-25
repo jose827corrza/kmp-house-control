@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.josedev.house_control.domain.HouseUiState
 import org.josedev.house_control.domain.models.Actuator
+import org.josedev.house_control.domain.models.ActuatorRequest
 import org.josedev.house_control.domain.models.House
 import org.josedev.house_control.domain.repository.HouseRepository
 
@@ -62,13 +63,13 @@ class HouseViewModel(
         }
     }
 
-    fun toggleActuatorState(actuatorId: String, newValue: Boolean) {
+    fun toggleActuatorState(actuatorId: String, houseId: String, newValue: Boolean) {
         viewModelScope.launch {
             _updatingIds.update { it + actuatorId }
 
             updateLocalActuatorState(actuatorId, newValue)
-
-            val result = houseRepository.updateActuatorState(actuatorId, newValue)
+            val actuatorRequest = ActuatorRequest(houseId, actuatorId, newValue)
+            val result = houseRepository.updateActuatorState(actuatorRequest)
 
             result.onFailure {
                 updateLocalActuatorState(actuatorId, !newValue)

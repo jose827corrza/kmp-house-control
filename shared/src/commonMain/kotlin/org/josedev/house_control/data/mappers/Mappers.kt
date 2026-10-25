@@ -2,6 +2,7 @@ package org.josedev.house_control.data.mappers
 
 import org.josedev.house_control.data.client.models.ActuatorDTO
 import org.josedev.house_control.data.client.models.ActuatorRequestDTO
+import org.josedev.house_control.data.client.models.ActuatorResponseDTO
 import org.josedev.house_control.data.client.models.HouseDTO
 import org.josedev.house_control.data.client.models.auth.AuthenticationResultDTO
 import org.josedev.house_control.data.client.models.auth.CognitoTokenResponseDTO
@@ -28,11 +29,22 @@ fun ActuatorDTO.toDomain(key: String): Actuator {
     )
 }
 
-fun ActuatorRequest.toData(): ActuatorRequestDTO {
+fun ActuatorRequest.toDTO(): ActuatorRequestDTO {
     return ActuatorRequestDTO(
         houseId = this.houseId,
         actuatorId = this.actuatorId,
         actuatorState = this.actuatorState
+    )
+}
+
+fun ActuatorResponseDTO.toDomain(): Actuator {
+//    val test = this.actuators.entries.associate { (key, dto) -> key to dto.toDomain(key) }
+    return Actuator(
+        // TODO
+        isActive = this.actuators.values.find { true }?.isActive ?: false,
+        id = this.actuators.keys.find { true }.orEmpty(),
+        name = "UPDATED ACTUATOR",
+        isUpdating = false
     )
 }
 

@@ -2,7 +2,6 @@ package org.josedev.house_control.data.client
 
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.request.bearerAuth
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
@@ -11,6 +10,7 @@ import io.ktor.http.ContentType.Application.Json
 import io.ktor.http.HttpHeaders.Authorization
 import io.ktor.http.headers
 import org.josedev.house_control.data.client.models.ActuatorRequestDTO
+import org.josedev.house_control.data.client.models.ActuatorResponseDTO
 import org.josedev.house_control.data.client.models.HouseDTO
 import org.josedev.house_control.utils.AppLogger
 
@@ -20,11 +20,10 @@ class ClientApiImpl(
 ) : ClientApi {
 
 
-    override suspend fun sendActuatorState(token: String, actuatorRequestDTO: ActuatorRequestDTO) {
-        return httpClient.post("control") {
+    override suspend fun updateActuatorState(actuatorRequestDTO: ActuatorRequestDTO): ActuatorResponseDTO {
+        return httpClient.post("actuator") {
             contentType(Json)
             setBody(actuatorRequestDTO)
-            bearerAuth(token)
         }.body()
     }
 
