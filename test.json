@@ -1,0 +1,37 @@
+[
+  {
+    "house_id": "aaa-bbb-ccc",
+    "house_name": "Soacha",
+    "actuator_id": "abc-abc-abc",
+    "actuator_name": "kitchen",
+    "actuator_state": false
+  },
+  {
+    "house_id": "xxx-yyy-zzz",
+    "house_name": "Soacha",
+    "actuator_id": "xyz-xyz-xyz",
+    "actuator_name": "living room",
+    "actuator_state": false
+  },
+  {
+    "house_id": "xxx-yyy-zzz",
+    "house_name": "Engativa",
+    "actuator_id": "xyz-qwe-xyz",
+    "actuator_name": "garage",
+    "actuator_state": false
+  },
+  {
+    "house_id": "xxx-yyy-zzz",
+    "house_name": "Engativa",
+    "actuator_id": "xyz-xyz-abc",
+    "actuator_name": "studio",
+    "actuator_state": false
+  },
+  {
+    "house_id": "xxx-yyy-zzz",
+    "house_name": "Engativa",
+    "actuator_id": "xyz-poi-abc",
+    "actuator_name": "studio",
+    "actuator_state": false
+  }
+]

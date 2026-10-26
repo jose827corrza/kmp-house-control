@@ -1,0 +1,50 @@
+package org.josedev.house_control.data.client
+
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.request.get
+import io.ktor.client.request.post
+import io.ktor.client.request.setBody
+import io.ktor.http.*
+import io.ktor.http.ContentType.Application.Json
+import io.ktor.http.HttpHeaders.Authorization
+import io.ktor.http.headers
+import org.josedev.house_control.data.client.models.ActuatorRequestDTO
+import org.josedev.house_control.data.client.models.ActuatorResponseDTO
+import org.josedev.house_control.data.client.models.HouseDTO
+import org.josedev.house_control.utils.AppLogger
+
+class ClientApiImpl(
+    private val httpClient: HttpClient,
+    private val logger: AppLogger,
+) : ClientApi {
+
+
+    override suspend fun updateActuatorState(actuatorRequestDTO: ActuatorRequestDTO): ActuatorResponseDTO {
+        return httpClient.post("actuator") {
+            contentType(Json)
+            setBody(actuatorRequestDTO)
+        }.body()
+    }
+
+    override suspend fun fetchHouses(): List<HouseDTO> {
+        return httpClient.get("houses") {
+            contentType(Json)
+        }.body()
+    }
+
+    /**
+     * Deprecated
+     */
+    override suspend fun fetchActuatorsByHouseId(token: String, houseId: String): List<HouseDTO> {
+        return httpClient.get("actuators") {
+            contentType(Json)
+            url {
+                appendPathSegments(houseId)
+            }
+            headers {
+                append(Authorization, "Bearer $token")
+            }
+        }.body()
+    }
+}

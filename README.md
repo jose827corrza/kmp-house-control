@@ -46,3 +46,47 @@ Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-mu
 We would appreciate your feedback on Compose/Web and Kotlin/Wasm in the public Slack
 channel [#compose-web](https://slack-chats.kotlinlang.org/c/compose-web). If you face any issues, please report them
 on [YouTrack](https://youtrack.jetbrains.com/newIssue?project=CMP).
+
+# CONSIDERATIONS
+
+IF libs that affect web are applied, is required to run:
+
+> ./gradlew kotlinUpgradeYarnLock
+
+But if in grade.properties there is configured the line below, nothing is required because NPM will do the work.
+
+> kotlin.js.yarn=false
+
+## Data Structure from Backend
+
+### Fetch Houses
+
+This will bring the complete list of houses and its actuators, following the structure. 
+This is the response expected with fetchHouses().
+
+```json
+[
+    {
+      "house_name": "Soacha",
+      "house_id": "aaa-bbb-ccc",
+      "actuator_id": "abc-abc-abc",
+      "actuator_name": "kitchen",
+      "actuator_state": false
+    },
+    {
+      "house_name": "Bogota",
+      "house_id": "xxx-yyy-zzz",
+      "actuator_id": "xyz-xyz-xyz",
+      "actuator_name": "living room",
+      "actuator_state": false
+    }
+]
+
+```
+
+## Auth Flow
+
+Since at least in a first approach of application, is desired to keep complete control for auth flow, it will be 
+implemented the Direct Native over OAuth2.0 / OICD.
+
+In this way, the deal of manage with popups will be avoided.
